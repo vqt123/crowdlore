@@ -1,7 +1,10 @@
-<script>
-	import Counter from './Counter.svelte';
-	import welcome from '$lib/images/svelte-welcome.webp';
-	import welcome_fallback from '$lib/images/svelte-welcome.png';
+<script lang="ts">
+	import type { PageData } from './$types';
+
+	// data props
+
+	export let data: PageData;
+	// get props from server
 </script>
 
 <svelte:head>
@@ -10,9 +13,10 @@
 </svelte:head>
 
 <section>
-	Testing
-
-	<Counter />
+	<pre>
+		test
+		{JSON.stringify(data, null, 2)}
+	</pre>
 </section>
 
 <style>
