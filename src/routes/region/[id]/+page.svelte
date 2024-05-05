@@ -17,12 +17,14 @@
 	<h2>Region</h2>
 	<h3>{region.name}</h3>
 	<h4>Level: {region.level}</h4>
-	<h4>Parent: {region.parentId}</h4>
+
+	<a target="_self" href={`/region/${region.parentId}`}>Parent: {region.parentId}</a>
+
 	<h4>Children:</h4>
 	<section class="grid grid-cols-5 gap-4 items-center justify-around">
 		{#each region.children as child}
 			<div class="flex items-center justify-center">
-				<a href={`/region/${child.id}`}>
+				<a href={`/region/${child.id}`} target="_self">
 					{child.breadcrumb}
 				</a>
 			</div>

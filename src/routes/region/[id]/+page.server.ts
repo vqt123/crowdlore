@@ -9,5 +9,5 @@ export const load = (async ({ params }) => {
 		region = await populateRegion(regionId);
 	}
 
-	return { params, region };
+	return { region };
 }) satisfies PageServerLoad;
