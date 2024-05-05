@@ -4,7 +4,22 @@
 	// data props
 
 	export let data: PageData;
+	const worlds = data.worlds;
 	// get props from server
+
+	export let createWorld = async (e: any) => {
+		e.preventDefault();
+		const worldName = e.target.worldName.value;
+		const res = await fetch('/api/worlds', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({ name: worldName })
+		});
+		const data = await res.json();
+		console.log(data);
+	};
 </script>
 
 <svelte:head>
@@ -13,38 +28,30 @@
 </svelte:head>
 
 <section>
+	<!-- create world form -->
+	<!-- 	
+		<input type="text" placeholder="World Name" name="worldName" />
+		<button type="submit">Create</button> -->
+
+	<form on:submit={createWorld}>
+		<input type="text" placeholder="World Name" name="worldName" />
+		<button type="submit">Create</button>
+	</form>
+
+	<section>
+		<h2>Worlds</h2>
+		<ul>
+			{#each worlds as world}
+				<li>
+					<button on:click={() => console.log(world)}>View</button>
+
+					{world.name}
+				</li>
+			{/each}
+		</ul>
+	</section>
 	<pre>
-		test
+		
 		{JSON.stringify(data, null, 2)}
 	</pre>
 </section>
-
-<style>
-	section {
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: center;
-		flex: 0.6;
-	}
-
-	h1 {
-		width: 100%;
-	}
-
-	.welcome {
-		display: block;
-		position: relative;
-		width: 100%;
-		height: 0;
-		padding: 0 0 calc(100% * 495 / 2048) 0;
-	}
-
-	.welcome img {
-		position: absolute;
-		width: 100%;
-		height: 100%;
-		top: 0;
-		display: block;
-	}
-</style>

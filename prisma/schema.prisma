@@ -15,9 +15,50 @@ datasource db {
 
 // kvp table
 model Kvp {
-  id        String @id @default(cuid())
-  key       String @unique
+  id        String   @id @default(cuid())
+  key       String   @unique
   value     String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+}
+
+// tree node using primary keys, DO NOT USE CUID
+
+model TreeNode {
+  id        Int      @id @default(autoincrement())
+  parentId  Int?
+  name      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  parent   TreeNode?  @relation("ParentChild", fields: [parentId], references: [id])
+  children TreeNode[] @relation("ParentChild")
+  Region   Region?
+}
+
+model Region {
+  id          Int      @id @default(autoincrement())
+  treeNodeId  Int      @unique
+  name        String
+  description String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  x           Float
+  y           Float
+  width       Float
+  height      Float
+  level       Int
+
+  treeNode TreeNode @relation(fields: [treeNodeId], references: [id])
+
+  @@index([level])
+}
+
+model World {
+  id           Int      @id @default(autoincrement())
+  name         String
+  description  String
+  rootRegionId Int      @unique
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
 }
