@@ -4,6 +4,7 @@
 	// data props
 
 	export let data: PageData;
+	const region = data.region!;
 	// get props from server
 </script>
 
@@ -13,6 +14,21 @@
 </svelte:head>
 
 <section>
+	<h2>Region</h2>
+	<h3>{region.name}</h3>
+	<h4>Level: {region.level}</h4>
+	<h4>Parent: {region.parentId}</h4>
+	<h4>Children:</h4>
+	<section class="grid grid-cols-5 gap-4 items-center justify-around">
+		{#each region.children as child}
+			<div class="flex items-center justify-center">
+				<a href={`/region/${child.id}`}>
+					{child.breadcrumb}
+				</a>
+			</div>
+		{/each}
+	</section>
+
 	<pre>
 		
 		{JSON.stringify(data, null, 2)}
