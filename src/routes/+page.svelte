@@ -18,6 +18,7 @@
 			body: JSON.stringify({ name: worldName })
 		});
 		const data = await res.json();
+		worlds.push(data);
 		console.log(data);
 	};
 </script>
@@ -43,7 +44,7 @@
 		<ul>
 			{#each worlds as world}
 				<li>
-					<button on:click={() => console.log(world)}>View</button>
+					<a href={`/region/${world.rootRegionId}`}>View</a>
 
 					{world.name}
 				</li>

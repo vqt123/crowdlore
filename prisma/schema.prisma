@@ -22,23 +22,11 @@ model Kvp {
   updatedAt DateTime @updatedAt
 }
 
-// tree node using primary keys, DO NOT USE CUID
-
-model TreeNode {
-  id        Int      @id @default(autoincrement())
-  parentId  Int?
-  name      String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  parent   TreeNode?  @relation("ParentChild", fields: [parentId], references: [id])
-  children TreeNode[] @relation("ParentChild")
-  Region   Region?
-}
-
 model Region {
   id          Int      @id @default(autoincrement())
-  treeNodeId  Int      @unique
+  parentId    Int?
+  children    Region[] @relation("ParentChild")
+  breadcrumb  String
   name        String
   description String
   createdAt   DateTime @default(now())
@@ -49,9 +37,10 @@ model Region {
   height      Float
   level       Int
 
-  treeNode TreeNode @relation(fields: [treeNodeId], references: [id])
-  World    World?
+  parent Region? @relation("ParentChild", fields: [parentId], references: [id])
+  World  World?
 
+  @@index([parentId])
   @@index([level])
 }
 

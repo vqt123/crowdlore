@@ -4,5 +4,5 @@ import type { PageServerLoad } from './$types';
 export const load = (async ({ params }) => {
 	// sveltekit params
 	const worlds = await prisma.world.findMany();
-	return { params, worlds, hello: 'world' };
+	return { params, worlds };
 }) satisfies PageServerLoad;
