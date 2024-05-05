@@ -4,20 +4,14 @@
 </script>
 
 <div class="app">
-	<Header />
-
 	<main>
 		<slot />
 	</main>
-
-	<footer>
-		<p>visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to learn SvelteKit</p>
-	</footer>
 </div>
 
 <!-- global styles-->
-<style>
-	* {
-		@apply bg-black bg-opacity-10 p-1;
+<style lang="postcss" global>
+	:global(*, button, section, div) {
+		@apply bg-gray-400 bg-opacity-5 p-[1px] m-[1px] rounded-sm  border-[1px] border-white border-opacity-50;
 	}
 </style>

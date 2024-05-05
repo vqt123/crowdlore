@@ -20,7 +20,7 @@ export async function kvpSet(key: string, value: string): Promise<void> {
 	});
 }
 
-interface RegionWithChildren extends Region {
+export interface RegionWithChildren extends Region {
 	children: Region[];
 }
 
@@ -76,7 +76,7 @@ export const createWorld = async (
 	const rootRegion = await prisma.region.create({
 		data: {
 			name: 'Root',
-			description: 'Root region',
+			description: '',
 			breadcrumb: 'Root',
 			x: 0,
 			y: 0,

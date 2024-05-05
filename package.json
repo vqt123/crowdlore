@@ -37,6 +37,7 @@
 	"type": "module",
 	"dependencies": {
 		"@prisma/client": "5.13.0",
+		"openai": "^4.40.2",
 		"prisma": "^5.13.0"
 	}
 }
