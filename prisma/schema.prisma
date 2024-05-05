@@ -50,6 +50,7 @@ model Region {
   level       Int
 
   treeNode TreeNode @relation(fields: [treeNodeId], references: [id])
+  World    World?
 
   @@index([level])
 }
@@ -61,4 +62,6 @@ model World {
   rootRegionId Int      @unique
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
+
+  rootRegion Region @relation(fields: [rootRegionId], references: [id])
 }
